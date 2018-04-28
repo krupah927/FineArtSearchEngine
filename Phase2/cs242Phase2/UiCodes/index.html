@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Main page</title>
+    <!-- build:css(.tmp) static/naturesbounty/c/global.css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="ir-search.css">
+    <script type="text/javascript">
+        // Picture element HTML5 shiv
+        document.createElement( "picture" );
+    </script>
+</head>
+
+    <!-- Initialize a new AngularJS app and associate it with a module named "instantSearch"-->
+	<body ng-app="instantSearch" ng-controller="InstantSearchController">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="content-cont">
+                            <div class="content">
+                                <h3 class="ir-heading">FINE ARTS SEARCH ENGINE</h3>
+                                <form action="">
+                                    <div class="bar">
+                                        <!-- Create a binding between the searchString model and the text field -->
+                                        <input type="text" ng-model="searchString" placeholder="Enter your search terms" />
+                                        <button ng-click="void">Search</button>
+                                    </div>
+<!--
+                                    <div class="index-select-cont" ng-controller="ButtonsCtrl">
+                                        <div class="btn-group">
+                                            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Lucene'">Lucene</label>
+                                            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Hadoop'">Hadoop</label>
+                                        </div>
+                                    </div>
+-->
+                                </form>
+                                <div ng-controller="ButtonsCtrl">
+                                    <h4>Single toggle</h4>
+                                    <pre>{{singleModel}}</pre>
+                                    <button type="button" class="btn btn-primary" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                                        Single Toggle
+                                    </button>
+                                    <h4>Checkbox</h4>
+                                    <pre>Model: {{checkModel}}</pre>
+                                    <pre>Results: {{checkResults}}</pre>
+                                    <div class="btn-group">
+                                        <label class="btn btn-primary" ng-model="checkModel.left" uib-btn-checkbox>Left</label>
+                                        <label class="btn btn-primary" ng-model="checkModel.middle" uib-btn-checkbox>Middle</label>
+                                        <label class="btn btn-primary" ng-model="checkModel.right" uib-btn-checkbox>Right</label>
+                                    </div>
+                                    <h4>Radio &amp; Uncheckable Radio</h4>
+                                    <pre>{{radioModel || 'null'}}</pre>
+                                    <div class="btn-group">
+                                        <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Left'">Left</label>
+                                        <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Middle'">Middle</label>
+                                        <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Right'">Right</label>
+                                    </div>
+                                    <div class="btn-group">
+                                        <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Left'" uncheckable>Left</label>
+                                        <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Middle'" uncheckable>Middle</label>
+                                        <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Right'" uib-uncheckable="uncheckable">Right</label>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-default" ng-click="uncheckable = !uncheckable">
+                                            Toggle uncheckable
+                                        </button>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <!-- Render a li element for every entry in the items array. Notice
+                                         the custom search filter "searchFor". It takes the value of the
+                                         searchString model as an argument.
+                                     -->
+                                    <li ng-repeat="i in items | searchFor:searchString">
+                                        <a href="{{i.url}}"><img ng-src="{{i.image}}" /></a>
+                                        <p>{{i.title}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+        <script src="scripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
+        
+        <!--
+        <script src="scripts/app.js"></script>
+        <script src="scripts/instantSearch.js"></script>
+-->
+        <script>
+            angular.module('instantSearch', ['ui.bootstrap']);
+            // Define a new module for our app
+var app = angular.module("instantSearch", []);
+
+// Create the instant search filter
+
+app.filter('searchFor', function(){
+
+	// All filters must return a function. The first parameter
+	// is the data that is to be filtered, and the second is an
+	// argument that may be passed with a colon (searchFor:searchString)
+
+	return function(arr, searchString){
+
+		if(!searchString){
+			return arr;
+		}
+
+		var result = [];
+
+		searchString = searchString.toLowerCase();
+
+		// Using the forEach helper method to loop through the array
+		angular.forEach(arr, function(item){
+
+			if(item.title.toLowerCase().indexOf(searchString) !== -1){
+				result.push(item);
+			}
+
+		});
+
+		return result;
+	};
+
+});
+
+
+
+
+// The controller
+
+app.controller('InstantSearchController', function($scope){
+    
+	// The data model. These items would normally be requested via AJAX,
+	// but are hardcoded here for simplicity. See the next example for
+	// tips on using AJAX.
+//    $http({
+//        method : "GET",
+//        url : "welcome.htm"
+//    }).then(function mySuccess(response) {
+//        $scope.myWelcome = response.data;
+//    }, function myError(response) {
+//        $scope.myWelcome = response.statusText;
+//    });
+	$scope.items = [
+		{
+			url: 'http://www.tutorialspoint.com/android/',
+			title: 'Android tutorials',
+			image: 'http://www.tutorialspoint.com/android/images/android-mini-logo.jpg'
+		},
+		{
+			url: 'http://www.tutorialspoint.com/angularjs/',
+			title: 'AngularJs Tutorials ',
+			image: 'http://www.tutorialspoint.com/angularjs/images/angularjs-mini-logo.jpg'
+		},
+		{
+			url: 'http://www.tutorialspoint.com/html5/',
+			title: 'HTML5 Tutorials',
+			image: 'http://www.tutorialspoint.com/html5/images/html5-mini-logo.jpg'
+		},
+		{
+			url: 'http://www.tutorialspoint.com/css/',
+			title: 'CSS Tutorials',
+			image: 'http://www.tutorialspoint.com/css/images/css-mini-logo.jpg'
+		},
+		{
+			url: 'http://www.tutorialspoint.com/java/',
+			title: 'Java Tutorials',
+			image: 'http://www.tutorialspoint.com/java/images/java-mini-logo.jpg'
+		},
+		{
+			url: 'http://www.tutorialspoint.com/joomla/',
+			title: 'Joomla Tutorials',
+			image: 'http://www.tutorialspoint.com/joomla/images/joomla-mini-logo.jpg'
+		},
+		{
+			url: 'http://www.tutorialspoint.com/html/',
+			title: 'HTML Tutorials ',
+			image: 'http://www.tutorialspoint.com/html/images/html-mini-logo.jpg'
+		}
+	];
+});
+
+app.controller('ButtonsCtrl', function ($scope) {
+  $scope.singleModel = 1;
+
+  $scope.radioModel = 'Middle';
+    
+  $scope.checkModel = {
+    left: false,
+    middle: true,
+    right: false
+  };
+
+  $scope.checkResults = [];
+
+  $scope.$watchCollection('checkModel', function () {
+    $scope.checkResults = [];
+    angular.forEach($scope.checkModel, function (value, key) {
+      if (value) {
+        $scope.checkResults.push(key);
+      }
+    });
+  });
+});
+
+
+
+        </script>
+    </body>
+</html>

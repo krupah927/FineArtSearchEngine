@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Main page</title>
+    <!-- build:css(.tmp) static/naturesbounty/c/global.css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="ir-search.css">
+    <script type="text/javascript">
+        // Picture element HTML5 shiv
+        document.createElement( "picture" );
+    </script>
+</head>
+
+    <!-- Initialize a new AngularJS app and associate it with a module named "instantSearch"-->
+	<body id="ir-main-body" ng-app="instantSearch" ng-controller="InstantSearchController">
+        <section class="ir-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="content-cont">
+                            <div class="content">
+                                <h3 class="ir-heading">FINE ARTS SEARCH ENGINE</h3>
+<!--                                <form action="">-->
+                                    <div class="bar">
+                                        <!-- Create a binding between the searchString model and the text field -->
+                                        <input type="text" ng-model="searchString" placeholder="Enter your search terms" />
+                                        <button ng-click="getResults()" type="button" class="btn btn-primary ir-search-btn" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                                            Search
+                                        </button>
+                                    </div>
+                                    <div class="index-select-cont" ng-controller="ButtonsCtrl">
+                                        <div class="btn-group">
+                                            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Lucene'" ng-click="LuceneCall()" data-val="1">Lucene</label>
+                                            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Hadoop'" ng-click="HadoopCall()" data-val="2">Hadoop</label>
+                                        </div>
+                                    </div>
+<!--                                </form>-->
+                                <div class="ir-search-results hide">
+                                    <ul class="ir-snippet hide">
+                                        <li class="ir-snippet-list">
+                                            <div class="result-img snippet"><a href="{{items[0].url}}"><img ng-src="{{items[0].imgsrc}}" /></a></div>
+                                            
+                                            <div class="result-content">
+                                                <h5 class="p-title"><a href="{{items[0].url}}">{{items[0].title}}</a></h5>
+                                                <div class="snippet-author"><span>You might be interested in other paintings by :</span>
+                                                    <a href="{{items[0].artistURL}}"><span class="p-artist">{{items[0].artist}}</span>
+                                                    </a>    
+                                                </div>
+                                                <p class="p-desc">{{items[0].description | limitTo : 1000}}</p>
+                                                <p ng-if="items[0].price != ''">Price : {{items[0].price}}</p>
+                                                <p ng-if="items[0].price == ''">Price : Not Available</p>
+                                                <div class="snippet-tags">
+                                                    <span class="snippet-tags-text">People also searched for :</span>
+                                                    <a ng-click="getResultsTag($event)" ng-repeat="j in items[0].tags" href="javascript:void(0)">{{j}}</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <!-- Render a li element for every entry in the items array. Notice
+                                             the custom search filter "searchFor". It takes the value of the
+                                             searchString model as an argument.
+                                         -->
+                                        <li ng-repeat="i in items">
+                                            <div class="result-img"><a href="{{i.url}}"><img ng-src="{{i.imgsrc}}" /></a></div>
+                                            <div class="result-content">
+                                                <h5 class="p-title"><a href="{{i.url}}">{{i.title}}</a></h5>
+                                                <a href="{{i.artistURL}}"><span class="p-artist">{{i.artist}}</span></a>
+                                                <p class="p-desc">{{i.description | limitTo : 500}}</p>
+                                                <p ng-if="i.price != ''">Price : {{i.price}}</p>
+                                                <p ng-if="i.price == ''">Price : Not Available</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+        <script src="scripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
+        <script src="scripts/app.js"></script>
+        
+        
+    </body>
+</html>
